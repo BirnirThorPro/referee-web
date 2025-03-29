@@ -30,16 +30,16 @@ import {
   Flag,
   Square,
   CircleHelp,
-  Pencil,
 } from 'lucide-react';
 import { Fixture, MatchEvent, MatchShort, PlayerInfo } from '@/types/types';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { cardReportSchema } from '@/form/schema';
 import { z } from 'zod';
 import { createClient } from '@/utils/supabase/client';
 import { AddRefereeDialog } from './add-referee-dialog';
 import { AddCardDialog } from './add-card-dialog';
 import { toast } from 'sonner';
+import Image from 'next/image';
 
 // Mock data - would be replaced with API data
 const cardReasons = [
@@ -145,13 +145,11 @@ export default function RefereeCardForm({
       const res = await axios.post('/api/fotmob', {
         url: `matchDetails?matchId=${selectedMatch}`,
       });
-      console.log(res.data);
       setMatchEvents(
         res.data.content.matchFacts.events.events.filter(
           (event: MatchEvent) => event.type === 'Card'
         )
       );
-      console.log(res.data.content.matchFacts.infoBox.Referee);
       const referee = res.data.content.matchFacts.infoBox.Referee.text;
       if (referee) {
         if (referees.includes(referee)) {
@@ -181,7 +179,6 @@ export default function RefereeCardForm({
       const res = await axios.post('/api/fotmob', {
         url: `playerData?id=${playerId}`,
       });
-      console.log(res.data);
       if (res.data.isCoach) {
         form.setValue('playerNumber', 'Þjálfari');
       } else {
@@ -198,6 +195,7 @@ export default function RefereeCardForm({
     if (playerId) fetchPlayer();
   }, [playerId]);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onCardChange = (value: string, field: any) => {
     const [card, playerName, playerId, timeStr] = value.split('-');
     form.setValue('cardType', card as 'Yellow' | 'YellowRed' | 'Red');
@@ -208,7 +206,7 @@ export default function RefereeCardForm({
 
   async function onSubmit(values: z.infer<typeof cardReportSchema>) {
     setIsSubmitting(true);
-    console.log('Submitting form:', values);
+    // console.log('Submitting form:', values);
     try {
       await supabase.from('CardReports').insert({
         tournament: tournamentName,
@@ -264,6 +262,7 @@ export default function RefereeCardForm({
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const CardSelectValue = ({ control }: { control: any }) => {
     const cardType = useWatch({ control, name: 'cardType' });
     const playerName = useWatch({ control, name: 'playerName' });
@@ -273,7 +272,7 @@ export default function RefereeCardForm({
     return (
       <>
         <DisplaySmallCard card={cardType} />
-        {playerName} - {minute}'
+        {playerName} - {minute}&apos;
       </>
     );
   };
@@ -282,9 +281,11 @@ export default function RefereeCardForm({
     <Card className="w-full bg-slate-50 border-t-4 border-t-emerald-500">
       <CardHeader className="flex items-center justify-center">
         <div className="w-full max-w-[180px] h-[90px] bg-gradient-to-r from-emerald-500 to-teal-600 flex items-center justify-center rounded-md mb-2 shadow-md">
-          <img
+          <Image
             src={`${tournamentImg}?height=90&width=180`}
-            alt="Besta Deildin"
+            alt="Tournament logo"
+            width={180}
+            height={90}
             className="max-h-full object-contain"
           />
         </div>
@@ -436,7 +437,7 @@ export default function RefereeCardForm({
                               value={`${event.card}-${event.fullName}-${event.playerId}-${event.timeStr}`}
                             >
                               <DisplaySmallCard card={event.card} />{' '}
-                              {event.fullName} - {event.timeStr}'
+                              {event.fullName} - {event.timeStr}&apos;
                             </SelectItem>
                           ))}
                           <AddCardDialog

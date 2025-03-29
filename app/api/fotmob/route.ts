@@ -26,6 +26,5 @@ async function getXmas() {
   // URL found from github: https://github.com/roimee6/fotmob/blob/main/dist/fotmob.js
   // Also this thread: https://www.reddit.com/r/webscraping/comments/1gijgkj/401_on_internal_api/
   const response = await axios.get('http://46.101.91.154:6006/');
-  console.log("Received X-mas data: ", response.data);
   return response.data['x-mas'];
 }
