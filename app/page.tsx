@@ -26,7 +26,7 @@ const tournaments = [
     img: '/mjolkurbikarinn.png_large',
   },
   { id: MEISTARABIKARINN_ID, name: 'Meistarar meistaranna', img: '/ksi.png' },
-  { id: FYRSTA_DEILD_ID, name: '1. deild', img: '/ksi.png' },
+  { id: FYRSTA_DEILD_ID, name: 'Lengjudeildin', img: '/ksi.png' },
 ];
 
 export default function Home() {

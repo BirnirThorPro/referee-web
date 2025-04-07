@@ -56,7 +56,8 @@ const cardReasons = [
   'Offensive language/gestures',
   'Second caution',
   'Stopping promising attack',
-  'Reckless'
+  'Reckless',
+  'Lack of respect'
 ];
 
 export default function RefereeCardForm({
