@@ -16,7 +16,6 @@ const BESTA_DEILDIN_ID = '215';
 const FYRSTA_DEILD_ID = '216';
 const MJOLKURBIKARINN_ID = '217';
 const MEISTARABIKARINN_ID = '10009';
-const LENGJAN_ID = '10076';
 const CURRENT_SEASON = new Date().getFullYear();
 
 const tournaments = [
@@ -27,7 +26,6 @@ const tournaments = [
     img: '/mjolkurbikarinn.png_large',
   },
   { id: MEISTARABIKARINN_ID, name: 'Meistarar meistaranna', img: '/ksi.png' },
-  { id: LENGJAN_ID, name: 'Lengjubikarinn', img: '/lengjubikarinn.png' },
   { id: FYRSTA_DEILD_ID, name: '1. deild', img: '/ksi.png' },
 ];
 

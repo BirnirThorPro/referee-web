@@ -55,6 +55,8 @@ const cardReasons = [
   'Denying goalscoring opportunity',
   'Offensive language/gestures',
   'Second caution',
+  'Stopping promising attack',
+  'Reckless'
 ];
 
 export default function RefereeCardForm({
@@ -581,7 +583,7 @@ export default function RefereeCardForm({
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {cardReasons.map((reason) => (
+                      {cardReasons.sort().map((reason) => (
                         <SelectItem key={reason} value={reason}>
                           {reason}
                         </SelectItem>
